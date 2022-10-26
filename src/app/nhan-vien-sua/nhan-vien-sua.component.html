@@ -1,0 +1,80 @@
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">CẬP NHẬT NHÂN VIÊN</h1>
+  </div>
+  <div class="row">
+    <form class="row g-3" [formGroup]="frm1" *ngIf="frm1">
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Họ nhân viên</label>
+        <input type="text" class="form-control" id="inputEmail4"  formControlName="hoNV">
+        <ng-container *ngIf="frm1.get('hoNV')?.dirty || frm1.get('hoNV')?.touched">
+          <em  class="text-danger" *ngIf="frm1.get('hoNV')?.hasError('required')">
+            Vui lòng nhập họ
+          </em>
+        </ng-container>
+      </div>
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Tên nhân viên</label>
+        <input type="text" class="form-control" id="inputPassword4"  formControlName="tenNV">
+        <ng-container *ngIf="frm1.get('tenNV')?.dirty || frm1.get('tenNV')?.touched">
+          <em  class="text-danger" *ngIf="frm1.get('tenNV')?.hasError('required')">
+            Vui lòng nhập tên
+          </em>
+        </ng-container>
+      </div>
+      <div class="col-12">
+        <label for="inputAddress" class="form-label">Ngày sinh</label>
+        <input type="date" class="form-control" id="inputAddress" formControlName="ngaySinh">
+        <ng-container *ngIf="frm1.get('ngaySinh')?.dirty || frm1.get('ngaySinh')?.touched">
+          <em  class="text-danger" *ngIf="frm1.get('ngaySinh')?.hasError('required')">
+            Vui lòng chọn ngày sinh
+          </em>
+        </ng-container>
+      </div>
+      <div class="col-12">
+        <label for="inputAddress" class="form-label">Giới tính</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="flexRadioDefault1"[value]="true" formControlName="phai">
+          <label class="form-check-label" for="flexRadioDefault1">
+            Nam
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="flexRadioDefault2" [value]="false" formControlName="phai">
+          <label class="form-check-label" for="flexRadioDefault2">
+            Nữ
+          </label>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <label for="inputState" class="form-label">Khu vực</label>
+        <input type="text" id="inputState" class="form-control"  formControlName="khuVuc">
+        <ng-container *ngIf="frm1.get('khuVuc')?.dirty || frm1.get('khuVuc')?.touched">
+          <em  class="text-danger" *ngIf="frm1.get('khuVuc')?.hasError('required')">
+            Vui lòng nhập khu vực
+          </em>
+        </ng-container>
+      </div>
+      <div class="col-12">
+        <label for="inputState" class="form-label">Leader</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio"  id="flexRadioDefault3"  [value]="true" formControlName="leader">
+          <label class="form-check-label" for="flexRadioDefault1">
+            Leader
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio"  id="flexRadioDefault4"  [value]="false" formControlName="leader">
+          <label class="form-check-label" for="flexRadioDefault2">
+            Non Leader
+          </label>
+        </div>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary" (click)="editNV()">Cập nhật nhân viên</button>
+      </div>
+    </form>
+  </div>
+</div>

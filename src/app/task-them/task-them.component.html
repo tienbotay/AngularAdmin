@@ -1,0 +1,86 @@
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">THÊM TASK</h1>
+  </div>
+  <div class="row">
+    <form class="row g-3" [formGroup]="frm1" *ngIf="frm1">
+      <div class="col-md-12">
+        <label for="inputEmail4" class="form-label">Tên TASK</label>
+        <input type="text" class="form-control" id="inputEmail4" name="tenTask" formControlName="tenTask" >
+        <ng-container *ngIf="frm1.get('tenTask')?.dirty || frm1.get('tenTask')?.touched">
+          <em  class="text-danger" *ngIf="frm1.get('tenTask')?.hasError('required')">
+            Vui lòng nhập tên Task
+          </em>
+        </ng-container>
+      </div>
+      <div class="form-floating">
+        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="moTa" formControlName="moTa" ></textarea>
+        <label for="floatingTextarea2">Mô tả</label>
+        <ng-container *ngIf="frm1.get('moTa')?.dirty || frm1.get('moTa')?.touched">
+          <em  class="text-danger" *ngIf="frm1.get('moTa')?.hasError('required')">
+            Vui lòng nhập mô tả
+          </em>
+        </ng-container>
+      </div>
+      <div class="col-md-12">
+        <label for="inputCity" class="form-label">Dự án</label>
+        <select id="inputState" class="form-select" name="duAnID" formControlName="duAnID">
+            <option *ngFor="let item of listDuAn" [value]="item.id">{{item.tenDuAn}}</option>
+        </select>
+        <ng-container *ngIf="frm1.get('duAnID')?.dirty || frm1.get('duAnID')?.touched">
+          <em  class="text-danger" *ngIf="frm1.get('duAnID')?.hasError('required')">
+            Vui lòng chọn dự án
+          </em>
+        </ng-container>
+      </div>
+      <div class="col-md-12">
+        <label for="inputCity" class="form-label">Nhân viên</label>
+        <select id="inputState" class="form-select" name="nhanVienID" formControlName="nhanVienID">
+            <ng-container *ngFor="let item of listDuAn">
+              <ng-container *ngIf="item.id==frm1.value.duAnID">
+                <ng-container *ngFor="let nv of listNV">
+                  <ng-container *ngFor="let nvDuAn of item.thanhvien">
+                    <option value="" *ngIf="nvDuAn==nv.id" [value]="nv.id">{{nv.ho + " " + nv.ten}}</option>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+        </select>
+        <ng-container *ngIf="frm1.get('nhanVienID')?.dirty || frm1.get('nhanVienID')?.touched">
+          <em  class="text-danger" *ngIf="frm1.get('nhanVienID')?.hasError('required')">
+            Vui lòng chọn nhân viên
+          </em>
+        </ng-container>
+      </div>
+      <div class="col-12">
+        <label for="inputAddress" class="form-label">Priority</label>
+        <input type="number" class="form-control" id="inputAddress" name="priority" formControlName="priority">
+        <ng-container *ngIf="frm1.get('priority')?.dirty || frm1.get('priority')?.touched">
+          <em  class="text-danger" *ngIf="frm1.get('priority')?.hasError('required')">
+            Vui lòng độ ưu tiên
+          </em>
+        </ng-container>
+      </div>
+      <div class="col-12">
+        <label for="inputAddress" class="form-label">Tiến độ</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="status" id="flexRadioDefault1" formControlName="status" [value]="1">
+          <label class="form-check-label" for="flexRadioDefault1">
+            Đã hoàn thành
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="status" id="flexRadioDefault2" formControlName="status" [value]="0">
+          <label class="form-check-label" for="flexRadioDefault2">
+            Chưa hoàn thành
+          </label>
+        </div>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary" (click)="themTask()">Thêm dự án</button>
+      </div>
+    </form>
+  </div>
+</div>

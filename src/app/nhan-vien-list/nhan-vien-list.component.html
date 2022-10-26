@@ -1,0 +1,42 @@
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">DANH SÁCH NHÂN VIÊN</h1>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid"
+          aria-describedby="dataTable_info" style="width: 100%;">
+          <thead>
+            <tr>
+              <th rowspan="1" colspan="1">ID</th>
+              <th rowspan="1" colspan="1">Họ Tên</th>
+              <th rowspan="1" colspan="1">Ngày sinh</th>
+              <th rowspan="1" colspan="1">Phái</th>
+              <th rowspan="1" colspan="1">Khu vực</th>
+              <th rowspan="1" colspan="1">Leader</th>
+              <th rowspan="1" colspan="1">Thao tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="" *ngFor="let item of listNhanVien">
+              <td>{{item.id}}</td>
+              <td>{{item.ho +" "+ item.ten}}</td>
+              <td>{{item.ngaysinh | date: "dd/MM/Y"}}</td>
+              <td>{{item.phai==true?"Nam":"Nữ"}}</td>
+              <td>{{item.khuvuc}}</td>
+              <td>{{item.leader==true?"Leader":""}}</td>
+              <td><a routerLink="../editNV/{{item.id}}">Sửa</a> | <a routerLink="./" (click)="xoaNV(item.id)">Xóa</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-5">
+        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Hiển thị: {{listNhanVien.length}} nhân viên</div>
+      </div>
+    </div>
+  
+  </div>

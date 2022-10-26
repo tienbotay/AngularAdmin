@@ -1,0 +1,48 @@
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">DANH SÁCH TASK</h1>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid"
+        aria-describedby="dataTable_info" style="width: 100%;">
+        <thead>
+          <tr>
+            <th rowspan="1" colspan="1">ID</th>
+            <th rowspan="1" colspan="1">Tên Task</th>
+            <th rowspan="1" colspan="1">Mô tả</th>
+            <th rowspan="1" colspan="1">Dự án</th>
+            <th rowspan="1" colspan="1">Nhân viên phụ trách</th>
+            <th rowspan="1" colspan="1">Priority</th>
+            <th rowspan="1" colspan="1">Tiến độ</th>
+            <th rowspan="1" colspan="1">Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="" *ngFor="let item of listTask">
+            <td>{{item.id}}</td>
+            <td>{{item.tenTask}}</td>
+            <td>{{item.moTa}}</td>
+            <ng-container *ngFor="let duAn of listDuAn">
+              <td *ngIf="duAn.id==item.duAnID">{{duAn.tenDuAn}}</td>
+            </ng-container>
+            <ng-container *ngFor="let nv of listNV">
+              <td *ngIf="nv.id==item.nhanvienID">{{nv.ho + " " + nv.ten}}</td>
+            </ng-container>
+            <td>{{item.priority}}</td>
+            <td>{{item.status==0?"Chưa hoàn thành":"Đã hoàn thành"}}</td>
+            <td><a routerLink="../editTask/{{item.id}}">Sửa</a> | <a routerLink="./" (click)="xoaTask(item.id)">Xóa</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-5">
+      <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Hiển thị: {{listTask.length}} task</div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,45 @@
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">DANH SÁCH DỰ ÁN</h1>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid"
+        aria-describedby="dataTable_info" style="width: 100%;">
+        <thead>
+          <tr>
+            <th rowspan="1" colspan="1">ID</th>
+            <th rowspan="1" colspan="1">Tên dự án</th>
+            <th rowspan="1" colspan="1">Ngày bắt đầu</th>
+            <th rowspan="1" colspan="1">Tiền</th>
+            <th rowspan="1" colspan="1">Leader</th>
+            <th rowspan="1" colspan="1">Nhân viên</th>
+            <th rowspan="1" colspan="1">Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="" *ngFor="let item of listDuAn">
+            <td>{{item.id}}</td>
+            <td>{{item.tenDuAn}}</td>
+            <td>{{item.ngayStart | date: "dd/MM/Y"}}</td>
+            <td>{{item.tien | currency: "VND" | lowercase}}</td>
+            <ng-container *ngFor="let nv of listNV">
+              <td *ngIf="item.leader==nv.id">{{nv.ho + " " + nv.ten}}</td>
+            </ng-container>
+              <td>{{thanhVienDuAn(item.thanhvien)}}</td>
+            <td><a routerLink="../editDuAn/{{item.id}}">Sửa</a> | <a routerLink="./" (click)="xoaDuAn(item.id)">Xóa</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-5">
+      <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Hiển thị: {{listDuAn.length}} dự
+        án</div>
+    </div>
+  </div>
+
+</div>

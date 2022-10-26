@@ -1,0 +1,68 @@
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">CẬP NHẬT DỰ ÁN</h1>
+  </div>
+  <div class="row">
+    <form class="row g-3" [formGroup]="frm1" *ngIf="frm1">
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Tên dự án</label>
+        <input type="email" class="form-control" id="inputEmail4" formControlName="tenDuAn" >
+        <ng-container *ngIf="frm1.get('tenDuAn')?.dirty || frm1.get('tenDuAn')?.touched">
+          <em  class="text-danger" *ngIf="frm1.get('tenDuAn')?.hasError('required')">
+            Vui lòng nhập tên dự án
+          </em>
+          <em  class="text-danger" *ngIf="frm1.get('tenDuAn')?.hasError('minlength')">
+            Tên dự án tối thiểu 2 kí tự
+          </em>
+        </ng-container>
+      </div>
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Ngày bắt đầu</label>
+        <input type="date" class="form-control" id="inputPassword4"  formControlName="ngayStart">
+        <ng-container *ngIf="frm1.get('ngayStart')?.dirty || frm1.get('ngayStart')?.touched">
+          <em  class="text-danger" *ngIf="frm1.get('ngayStart')?.hasError('required')">
+            Vui lòng chọn ngày bắt đầu dự án
+          </em>
+        </ng-container>
+      </div>
+      <div class="col-12">
+        <label for="inputAddress" class="form-label">Giá tiền</label>
+        <input type="number" class="form-control" id="inputAddress"  formControlName="tien" >
+        <ng-container *ngIf="frm1.get('tien')?.dirty || frm1.get('tien')?.touched">
+          <em  class="text-danger" *ngIf="frm1.get('tien')?.hasError('required')">
+            Vui lòng nhập số tiền
+          </em>
+        </ng-container>
+      </div>
+      <div class="col-md-6">
+        <label for="inputCity" class="form-label">Leader</label>
+        <select id="inputState" class="form-select" formControlName="leader" >
+          <ng-container *ngFor="let nv of listNV">
+            <option *ngIf="nv.leader===true" [value]="nv.id">{{nv.ho +" "+nv.ten}}</option>
+          </ng-container>
+        </select>
+        <ng-container *ngIf="frm1.get('leader')?.dirty || frm1.get('leader')?.touched">
+          <em  class="text-danger" *ngIf="frm1.get('leader')?.hasError('required')">
+            Vui lòng chọn người quản lý dự án
+          </em>
+        </ng-container>
+      </div>
+      <div class="col-md-6">
+        <label for="inputState" class="form-label">Thành viên</label>
+        <select id="inputState" class="form-select" multiple formControlName="thanhVien">
+          <option *ngFor="let nv of listNV" [value]="nv.id">{{nv.ho +" "+nv.ten}}</option>
+        </select>
+        <ng-container *ngIf="frm1.get('thanhVien')?.dirty || frm1.get('thanhVien')?.touched">
+          <em  class="text-danger" *ngIf="frm1.get('thanhVien')?.hasError('required')">
+            Vui lòng chọn thành viên thực hiện dự án
+          </em>
+        </ng-container>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary" (click)="editDuAn()">Cập nhật dự án</button>
+      </div>
+    </form>
+  </div>
+</div>
